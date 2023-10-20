@@ -43,7 +43,7 @@ import com.carolinarollergirls.scoreboard.penalties.PenaltyCode;
 import com.carolinarollergirls.scoreboard.penalties.PenaltyCodesDefinition;
 import com.carolinarollergirls.scoreboard.rules.Rule;
 import com.carolinarollergirls.scoreboard.rules.RuleDefinition;
-import com.carolinarollergirls.scoreboard.utils.BasePath;
+import com.carolinarollergirls.scoreboard.utils.ConfigPath;
 import com.carolinarollergirls.scoreboard.utils.ClockConversion;
 import com.carolinarollergirls.scoreboard.utils.ScoreBoardClock;
 import com.carolinarollergirls.scoreboard.utils.StatsbookExporter;
@@ -265,9 +265,9 @@ public class GameImpl extends ScoreBoardEventProviderImpl<Game> implements Game 
                 return checkNewFilename(newName);
             }
         } else if (prop == STATSBOOK_EXISTS) {
-            return BasePath.get().toPath().resolve("html/game-data/xlsx/" + getFilename() + ".xlsx").toFile().canRead();
+            return ConfigPath.get().toPath().resolve("html/game-data/xlsx/" + getFilename() + ".xlsx").toFile().canRead();
         } else if (prop == JSON_EXISTS) {
-            return BasePath.get().toPath().resolve("html/game-data/json/" + getFilename() + ".json").toFile().canRead();
+            return ConfigPath.get().toPath().resolve("html/game-data/json/" + getFilename() + ".json").toFile().canRead();
         } else if (prop == RULESET && value != null && !source.isFile()) {
             if (get(STATE) != State.PREPARED && source == Source.WS) {
                 return null; // no change after game start
@@ -980,7 +980,7 @@ public class GameImpl extends ScoreBoardEventProviderImpl<Game> implements Game 
     protected boolean replacePending = false;
     protected boolean autostartRan = false;
 
-    protected static File jsonDirectory = new File(BasePath.get(), "html/game-data/json");
+    protected static File jsonDirectory = new File(ConfigPath.get(), "html/game-data/json");
 
     protected Timeout noTimeoutDummy;
 

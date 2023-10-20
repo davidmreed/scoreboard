@@ -96,8 +96,8 @@ public class StatsbookExporter extends Thread {
         try {
             String blankStatsbookPath = game.getScoreBoard().getSettings().get(ScoreBoard.SETTING_STATSBOOK_INPUT);
             if (!"".equals(blankStatsbookPath)) {
-                Path tmpPath = BasePath.get().toPath().resolve("html/game-data/xlsx/~" + game.getFilename() + ".xlsx");
-                Path fullPath = BasePath.get().toPath().resolve("html/game-data/xlsx/" + game.getFilename() + ".xlsx");
+                Path tmpPath = ConfigPath.get().toPath().resolve("html/game-data/xlsx/~" + game.getFilename() + ".xlsx");
+                Path fullPath = ConfigPath.get().toPath().resolve("html/game-data/xlsx/" + game.getFilename() + ".xlsx");
                 Files.copy(Paths.get(blankStatsbookPath), tmpPath, REPLACE_EXISTING);
                 FileInputStream in = new FileInputStream(tmpPath.toFile());
                 wb = WorkbookFactory.create(in);

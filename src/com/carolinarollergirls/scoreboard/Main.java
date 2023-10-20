@@ -32,6 +32,7 @@ import com.carolinarollergirls.scoreboard.json.AutoSaveJSONState;
 import com.carolinarollergirls.scoreboard.json.JSONStateManager;
 import com.carolinarollergirls.scoreboard.json.ScoreBoardJSONListener;
 import com.carolinarollergirls.scoreboard.utils.BasePath;
+import com.carolinarollergirls.scoreboard.utils.ConfigPath;
 import com.carolinarollergirls.scoreboard.utils.Logger;
 import com.carolinarollergirls.scoreboard.utils.Version;
 import com.carolinarollergirls.scoreboard.viewer.ScoreBoardMetricsCollector;
@@ -67,7 +68,7 @@ public class Main extends Logger {
         // Viewers.
         new ScoreBoardMetricsCollector(scoreBoard).register();
 
-        final File autoSaveDir = new File(BasePath.get(), "config/autosave");
+        final File autoSaveDir = new File(COnfigPath.get(), "config/autosave");
         scoreBoard.runInBatch(new Runnable() {
             @Override
             public void run() {
@@ -166,7 +167,7 @@ public class Main extends Logger {
         Path sourcePath = null;
         if (importPath == null) {
             // no import path given on command line
-            if (Files.exists(Paths.get("config", "autosave"))) {
+            if (Files.exists(ConfigPath.get)("config", "autosave"))) {
                 Logger.printMessage("Found existing autosave dir - skipping import");
                 return;
             } // if not first start don't import
@@ -202,7 +203,7 @@ public class Main extends Logger {
         }
 
         Logger.printMessage("importing data from " + sourcePath.toString());
-        Path targetPath = Paths.get(".");
+        Path targetPath = Paths.get("."); // DMR: this whole method is a wreck
         try {
             copyFiles(sourcePath, targetPath, Paths.get("config", "autosave"), ".json",
                       StandardCopyOption.REPLACE_EXISTING);
@@ -249,7 +250,7 @@ public class Main extends Logger {
 
     private String importPath = null;
 
-    private File logFile = new File(BasePath.get(), "logs/crg.log");
+    private File logFile = new File(ConfigPath.get(), "logs/crg.log");
 
     private static ScoreBoard scoreBoard;
 }

@@ -20,13 +20,13 @@ import java.util.Collection;
 import com.carolinarollergirls.scoreboard.core.interfaces.Media;
 import com.carolinarollergirls.scoreboard.core.interfaces.ScoreBoard;
 import com.carolinarollergirls.scoreboard.event.ScoreBoardEventProviderImpl;
-import com.carolinarollergirls.scoreboard.utils.BasePath;
+import com.carolinarollergirls.scoreboard.utils.ConfigPath;
 
 public class MediaImpl extends ScoreBoardEventProviderImpl<Media> implements Media {
     public MediaImpl(ScoreBoard parent) {
         super(parent, "", ScoreBoard.MEDIA);
         addProperties(props);
-        setup(BasePath.get().toPath().resolve("html"));
+        setup(ConfigPath.get().toPath().resolve("html"));
     }
 
     private void setup(Path path) {

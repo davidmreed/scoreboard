@@ -8,3 +8,11 @@ public class BasePath {
 
     private static File basePath = new File(".");
 }
+
+public class ConfigPath {
+    public static File get() { return basePath; }
+    public static void set(File f) { basePath = f; } // for unit tests
+
+    private static File basePath = new File(".");
+}
+

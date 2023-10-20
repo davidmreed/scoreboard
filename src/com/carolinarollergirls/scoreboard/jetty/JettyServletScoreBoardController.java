@@ -23,7 +23,7 @@ import org.eclipse.jetty.servlet.ServletHolder;
 
 import com.carolinarollergirls.scoreboard.core.interfaces.ScoreBoard;
 import com.carolinarollergirls.scoreboard.json.JSONStateManager;
-import com.carolinarollergirls.scoreboard.utils.BasePath;
+import com.carolinarollergirls.scoreboard.utils.ConfigPath;
 import com.carolinarollergirls.scoreboard.utils.Logger;
 
 import io.prometheus.client.exporter.MetricsServlet;
@@ -91,7 +91,7 @@ public class JettyServletScoreBoardController {
         HttpServlet ljs = new LoadJsonScoreBoard(scoreBoard);
         sch.addServlet(new ServletHolder(ljs), "/Load/*");
 
-        HttpServlet ms = new MediaServlet(scoreBoard, new File(BasePath.get(), "html").getPath());
+        HttpServlet ms = new MediaServlet(scoreBoard, new File(ConfigPath.get(), "html").getPath());
         sch.addServlet(new ServletHolder(ms), "/Media/*");
     }
 

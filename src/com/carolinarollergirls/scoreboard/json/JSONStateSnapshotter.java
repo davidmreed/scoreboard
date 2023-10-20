@@ -11,7 +11,7 @@ import java.util.TreeMap;
 import com.fasterxml.jackson.jr.ob.JSON;
 
 import com.carolinarollergirls.scoreboard.core.interfaces.Game;
-import com.carolinarollergirls.scoreboard.utils.BasePath;
+import com.carolinarollergirls.scoreboard.utils.ConfigPath;
 import com.carolinarollergirls.scoreboard.utils.Logger;
 
 import io.prometheus.client.Histogram;
@@ -19,7 +19,7 @@ import io.prometheus.client.Histogram;
 public class JSONStateSnapshotter implements JSONStateListener {
 
     public JSONStateSnapshotter(JSONStateManager jsm, Game g) {
-        this.directory = BasePath.get();
+        this.directory = ConfigPath.get();
         game = g;
         pathPrefix = "ScoreBoard.Game(" + game.getId() + ")";
         jsm.register(this);
