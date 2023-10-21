@@ -24,7 +24,7 @@ import com.carolinarollergirls.scoreboard.core.interfaces.ScoreBoard;
 import com.carolinarollergirls.scoreboard.event.ScoreBoardEvent;
 import com.carolinarollergirls.scoreboard.event.ScoreBoardEventProviderImpl;
 import com.carolinarollergirls.scoreboard.event.ScoreBoardListener;
-import com.carolinarollergirls.scoreboard.utils.BasePath;
+import com.carolinarollergirls.scoreboard.utils.ConfigPath;
 
 public class MediaImplTests {
 
@@ -54,15 +54,15 @@ public class MediaImplTests {
         dir.newFolder("html", "images", "teamlogo");
         init = dir.newFile("html/images/teamlogo/init.png");
 
-        oldDir = BasePath.get();
-        BasePath.set(dir.getRoot());
+        oldDir = ConfigPath.get();
+        ConfigPath.set(dir.getRoot());
         media = new MediaImpl(sbMock);
         media.addScoreBoardListener(listener);
     }
 
     @After
     public void tearDown() throws Exception {
-        BasePath.set(oldDir);
+        ConfigPath.set(oldDir);
     }
 
     @Test

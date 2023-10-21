@@ -28,7 +28,7 @@ import com.carolinarollergirls.scoreboard.core.interfaces.Skater;
 import com.carolinarollergirls.scoreboard.core.interfaces.Team;
 import com.carolinarollergirls.scoreboard.core.prepared.RulesetsImpl;
 import com.carolinarollergirls.scoreboard.rules.Rule;
-import com.carolinarollergirls.scoreboard.utils.BasePath;
+import com.carolinarollergirls.scoreboard.utils.ConfigPath;
 import com.carolinarollergirls.scoreboard.utils.ScoreBoardClock;
 import com.carolinarollergirls.scoreboard.utils.ValWithId;
 
@@ -53,8 +53,8 @@ public class ScoreBoardJSONListenerTests {
 
     @Before
     public void setUp() throws Exception {
-        oldDir = BasePath.get();
-        BasePath.set(dir.getRoot());
+        oldDir = ConfigPath.get();
+        ConfigPath.set(dir.getRoot());
         dir.newFolder("config", "penalties");
         Files.copy(oldDir.toPath().resolve("config/penalties/wftda2018.json"),
                    dir.getRoot().toPath().resolve("config/penalties/wftda2018.json"));
@@ -84,7 +84,7 @@ public class ScoreBoardJSONListenerTests {
         assertEquals("foo", state.get("ScoreBoard.Settings.Setting(teardownTest)"));
         ScoreBoardClock.getInstance().start(false);
         GameImpl.setQuickClockThreshold(1000L);
-        BasePath.set(oldDir);
+        ConfigPath.set(oldDir);
     }
 
     private void advance(long time_ms) {

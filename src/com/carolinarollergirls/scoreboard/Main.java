@@ -68,7 +68,7 @@ public class Main extends Logger {
         // Viewers.
         new ScoreBoardMetricsCollector(scoreBoard).register();
 
-        final File autoSaveDir = new File(COnfigPath.get(), "config/autosave");
+        final File autoSaveDir = new File(ConfigPath.get(), "config/autosave");
         scoreBoard.runInBatch(new Runnable() {
             @Override
             public void run() {
@@ -167,7 +167,7 @@ public class Main extends Logger {
         Path sourcePath = null;
         if (importPath == null) {
             // no import path given on command line
-            if (Files.exists(ConfigPath.get)("config", "autosave"))) {
+            if (Files.exists(Paths.get("config", "autosave"))) {
                 Logger.printMessage("Found existing autosave dir - skipping import");
                 return;
             } // if not first start don't import
