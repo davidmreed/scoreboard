@@ -99,6 +99,7 @@ public class StatsbookExporter extends Thread {
     public void run() {
         boolean success = false;
         try {
+            // DMR: this does not work.
             String blankStatsbookPath = game.getScoreBoard().getSettings().get(ScoreBoard.SETTING_STATSBOOK_INPUT);
             if (!"".equals(blankStatsbookPath)) {
                 Path tmpPath = ConfigPath.get().toPath().resolve("html/game-data/xlsx/~" + game.getFilename() + ".xlsx");

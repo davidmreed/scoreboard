@@ -1,6 +1,7 @@
 package com.carolinarollergirls.scoreboard.jetty;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.SocketException;
 import java.util.EnumSet;
@@ -20,6 +21,8 @@ import org.eclipse.jetty.servlet.DefaultServlet;
 import org.eclipse.jetty.servlet.FilterHolder;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+import org.eclipse.jetty.util.resource.Resource;
+import org.eclipse.jetty.util.resource.ResourceCollection;
 
 import com.carolinarollergirls.scoreboard.core.interfaces.ScoreBoard;
 import com.carolinarollergirls.scoreboard.json.JSONStateManager;
@@ -70,7 +73,16 @@ public class JettyServletScoreBoardController {
             new MetricsFilter("jetty_http_request_latency_seconds", "Jetty HTTP request latency", 2, null));
         sch.addFilter(mf, "/*", EnumSet.of(DispatcherType.REQUEST));
 
-        sch.setResourceBase((new File(BasePath.get(), "html")).getPath());
+        try {
+            sch.setBaseResource(
+                new ResourceCollection(
+                    Resource.newResource((new File(ConfigPath.get(), "html")).getPath()),
+                    Resource.newResource((new File(BasePath.get(), "html")).getPath())
+                )
+            );
+        } catch (IOException e) {
+            // DMR TODO
+        }
         ServletHolder sh = new ServletHolder(new DefaultServlet());
         sh.setInitParameter("cacheControl", "no-cache");
         sh.setInitParameter("etags", "true");
