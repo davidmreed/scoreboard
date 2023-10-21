@@ -128,6 +128,8 @@ public class Main extends Logger {
                 host = arg.split("=", 2)[1];
             } else if (arg.startsWith("--import=") || arg.startsWith("-i=")) {
                 importPath = arg.split("=", 2)[1];
+            } else if (arg.startsWith("--config-path=") || arg.startsWith("-c=")) {
+                ConfigPath.set(new File(arg.split("=", 2)[1]));
             }
         }
 
